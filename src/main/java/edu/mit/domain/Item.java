@@ -18,6 +18,9 @@ public class Item {
     @Column(name = "ID")
     private long itemId;
 
+    @Column(name = "Refid")
+    private String refid;
+
     @Column(name = "Format")
     private String format;
 
@@ -146,11 +149,20 @@ public class Item {
         this.content = content;
     }
 
+    public String getRefid() {
+        return refid;
+    }
+
+    public void setRefid(String refid) {
+        this.refid = refid;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
                 "id=" + id +
                 ", itemId=" + itemId +
+                ", refid='" + refid + '\'' +
                 ", format='" + format + '\'' +
                 ", transferStatus='" + transferStatus + '\'' +
                 ", transferMethod='" + transferMethod + '\'' +

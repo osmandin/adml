@@ -67,7 +67,6 @@ public class SingleItemController {
             model.addAttribute("item", item);
             return "singleitem";
         }
-        System.out.println("unknown case");
         return "error";
     }
 

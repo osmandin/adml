@@ -1,19 +1,20 @@
-// Generate date variables
-var date = new Date();
-var day = date.getDate();
-var month = date.getMonth() + 1;
-var year = date.getFullYear();
-if (month < 10) month = "0" + month;
-if (day < 10) day = "0" + day;
-var today = year + "-" + month + "-" + day;
-var asRepo = "2";
-var baseURL = "http://localhost:8089/"
-var token="4dd2847ad4d47ce8eba9c8f613484acc4a462547b5248b7ce2ea7f19f0f26c0b"
+// This JS file is temporary and will be replaced when we have a different API.
 
+var asRepo = "2";
+var baseURL = "http://159.203.105.249:8089/";
+var serverURL="http://104.236.224.175/adml/token"; // change when changing IPs
+var token;
 
 $(document).ready(function() {
+
+    $.get( serverURL, function(data){
+        token = data;
+        // console.log(token);
+    });
+
     $('#find_in_as').click(function () {
         //e.preventDefault();
+        // alert("loaded");
         refid = $('#refID').val();
         var params = "ref_id[]=" + refid;
         getResults(params, refid);
@@ -30,22 +31,6 @@ $('#find_in_as').on('click', function(e) {
     getResults(params, refid);
 });
 
-// Populate auto id field with unique ID
-function generateId() {
-    if ($('#dm_item_auto_id').val() == "") {
-        var auto_id = createId();
-        $('#dm_item_auto_id').val(auto_id);
-    }
-}
-
-// Generate a unique ID
-function createId() {
-    var text = "";
-    var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
-    for( var i=0; i < 10; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    return text;
-}
 
 // Get JSON results from the AS endpoint
 function getResults(data, refid) {
@@ -58,11 +43,11 @@ function getResults(data, refid) {
         url: baseURL + "/repositories/"+ asRepo +"/find_by_id/archival_objects?",
         data: data,
         success: function(results) {
-            // alert("success");
+            // alert("ok: get results");
             if (results["archival_objects"].length < 1) {
                 console.log("Sorry, I couldn't find anything for " + refid);
             } else {
-                // alert(results["archival_objects"][0]["ref"]);
+                //alert(results["archival_objects"][0]["ref"]);
                 getData(results["archival_objects"][0]["ref"]);
             }
         }
@@ -79,7 +64,7 @@ function getData(uri) {
         },
         url: baseURL + uri,
         success: function(data) {
-            // alert("success")
+            // alert("ok: get data call")
             if (data["jsonmodel_type"] == "resource") {
                 $('#resource').val(data["title"] + ' (' + data["id_0"] + ')');
             } else if (data["jsonmodel_type"] == "archival_object") {
@@ -89,14 +74,4 @@ function getData(uri) {
             }
         }
     });
-}
-
-function validateForm() {
-    var isValid = true;
-    $('.dm_items .form-control[required]').each(function() {
-        if ( $(this).val() == ''  ) {
-            isValid = false;
-        }
-    });
-    return isValid;
 }

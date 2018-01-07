@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Digital Media Log</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
@@ -57,21 +57,21 @@
                         <div class="form-group row">
                             <label for="refID" class="col-sm-2 col-form-label">ASpace RefID</label>
                             <div class="col-sm-10">
-                                <input class="form-control" id="refID" placeholder=""/>
+                                <input class="form-control" id="refID" placeholder="" th:field="${item.refid}"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="parent" class="col-sm-2 col-form-label">Parent Component</label>
                             <div class="col-sm-10">
-                                <input  class="form-control" id="parent" placeholder=""/>
+                                <input class="form-control" id="component" placeholder="" th:field="${item.component}"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="parent_resource" class="col-sm-2 col-form-label">Parent Resource</label>
                             <div class="col-sm-10">
-                                <input  class="form-control" id="parent_resource" placeholder=""/>
+                                <input class="form-control" id="resource" placeholder="" th:field="${item.resource}"/>
                             </div>
                         </div>
 
