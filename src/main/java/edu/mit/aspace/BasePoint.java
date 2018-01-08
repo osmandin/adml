@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/token")
 @CrossOrigin
+@RequestMapping("/token")
 public class BasePoint {
 
     private static String s = Aspace.authenticate(); //TODO change

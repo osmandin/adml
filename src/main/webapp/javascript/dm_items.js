@@ -1,14 +1,15 @@
-// This JS is temporary and will be replaced.
+// This JS file is temporary and will be replaced when we have a different API.
 
 var asRepo = "2";
 var baseURL = "http://159.203.105.249:8089/";
-var serverURL="http://104.236.224.175:8080/adml/token";
+var serverURL="http://104.236.224.175/adml/token"; // change when changing IPs
 var token;
 
 $(document).ready(function() {
 
     $.get( serverURL, function(data){
         token = data;
+        // console.log(token);
     });
 
     $('#find_in_as').click(function () {
