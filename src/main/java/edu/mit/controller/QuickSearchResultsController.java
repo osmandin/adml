@@ -29,8 +29,8 @@ public class QuickSearchResultsController {
 
     private static final int BUTTONS_TO_SHOW = 5;
     private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 5;
-    private static final int[] PAGE_SIZES = {5, 10, 15};
+    private static final int INITIAL_PAGE_SIZE = 25;
+    private static final int[] PAGE_SIZES = {25, 50, 100};
 
     private ItemService itemService;
 

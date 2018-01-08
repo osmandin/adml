@@ -89,17 +89,17 @@
                             <ul class="pagination">
                                 <li th:class="${items.getNumber() == 0} ? disabled">
                                     <a class="pageLink"
-                                       th:href="@{/results(pageSize=${selectedPageSize}, page=${items.getNumber()}, content=${search.content}, keywordOption=${search.keywordOption})}">&larr;</a>
+                                       th:href="@{/results(pageSize=${selectedPageSize}, page=${items.getNumber()}, content=${search.content})}">&larr;</a>
                                 </li>
                                 <li th:class="${items.getNumber() == (page - 1)} ? 'active pointer-disabled'"
                                     th:each="page : ${#numbers.sequence(pager.getStartPage(), pager.getEndPage())}">
                                     <a class="pageLink"
-                                       th:href="@{/results(pageSize=${selectedPageSize}, page=${page}, content=${search.content}, keywordOption=${search.keywordOption})}"
+                                       th:href="@{/results(pageSize=${selectedPageSize}, page=${page}, content=${search.content})}"
                                        th:text="${page}"></a>
                                 </li>
                                 <li th:class="${items.getNumber() + 1 == items.getTotalPages()} ? disabled">
                                     <a class="pageLink"
-                                       th:href="@{/results(pageSize=${selectedPageSize}, page=${items.getNumber() + 2}, content=${search.content}, keywordOption=${search.keywordOption})}">&rarr;</a>
+                                       th:href="@{/results(pageSize=${selectedPageSize}, page=${items.getNumber() + 2}, content=${search.content})}">&rarr;</a>
                                 </li>
                             </ul>
                         </div>
