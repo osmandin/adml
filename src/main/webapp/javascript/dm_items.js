@@ -10,6 +10,8 @@ $(document).ready(function() {
     $.get( serverURL, function(data){
         token = data;
         // console.log(token);
+    }).fail(function() {
+        alert("Error doing a lookup.");
     });
 
     $('#find_in_as').click(function () {
