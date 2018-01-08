@@ -14,7 +14,7 @@ Dependencies
 
 - A running ArchivesSpace instance
 - Maven for building the project.
-- connection.props to specify aspace and app user credentials
+- `connection.props` to specify ArchivesSpace and app user credentials
 - A relational database (for production use)
 
 When deploying to production:
@@ -22,7 +22,7 @@ When deploying to production:
 - Supply application-prod.properties to specify database credentials. This will be replaced
 with Tomcat JNDI connections in future.
 - Grep for IPs for ASpace and production machine IP when deploying in production and change
-the IPs from "localhost" to the new address.
+the IPs from `localhost` to the new address.
 
 
 Build
@@ -46,22 +46,22 @@ java -jar target/adml-0.0.1-SNAPSHOT.war
 Test
 --------
 
-Visit http://localhost:8080/adml.
+Visit `http://localhost:8080/adml`.
 
 
 Server Deployment
 -------------------
-- Copy application-prod.properties and connection.properties to resources directory.
-- Compile the application with the -P prod flag (not -P dev)
+- Copy `application-prod.properties` and `connection.properties` to resources directory.
+- Compile the application with the `-P prod` flag (not `-P dev`)
 - Install MySql
 - Install httpd and enable reverse proxy.
-- Install Tomcat.
+- Install Tomcat 8 (use the latest).
 - Drop the .war to webapps folder.
 
 Where is this service deployed?
 ---------------------------------
-- In iasc.mit.edu slash adml.
-- You can find the war file in Tomcat /opt/...
+- In `iasc.mit.edu` slash `adml`.
+- You can find the war file in Tomcat `/opt/...`
 - The app lives on a Digital Ocean Cent OS droplet.
 
 Backups
