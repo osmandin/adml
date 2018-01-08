@@ -57,21 +57,21 @@
                         <div class="form-group row">
                             <label for="refID" class="col-sm-2 col-form-label">ASpace RefID</label>
                             <div class="col-sm-10">
-                                <input class="form-control" id="refID" placeholder=""/>
+                                <input class="form-control" id="refID" placeholder="" th:field="${item.refid}"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="parent" class="col-sm-2 col-form-label">Parent Component</label>
                             <div class="col-sm-10">
-                                <input  class="form-control" id="parent" placeholder=""/>
+                                <input class="form-control" id="component" placeholder="" th:field="${item.component}"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="parent_resource" class="col-sm-2 col-form-label">Parent Resource</label>
                             <div class="col-sm-10">
-                                <input  class="form-control" id="parent_resource" placeholder=""/>
+                                <input class="form-control" id="resource" placeholder="" th:field="${item.resource}"/>
                             </div>
                         </div>
 

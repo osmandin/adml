@@ -1,6 +1,7 @@
 package edu.mit.controller;
 
 
+import edu.mit.properties.PropertiesConfigurationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -21,8 +22,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        final String user = PropertiesConfigurationUtil.getCredentials().getUsername_app();
+        final String password = PropertiesConfigurationUtil.getCredentials().getPassword_app();
         auth
                 .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+                .withUser(user).password(password).roles("USER");
     }
 }

@@ -35,6 +35,7 @@
 	<logger name="edu.mit" level="debug"
             additivity="false">
 		<appender-ref ref="FILE-AUDIT" />
+		<appender-ref ref="STDOUT" />
 	</logger>
 
 

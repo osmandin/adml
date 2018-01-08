@@ -54,7 +54,7 @@ public class HttpServiceUtil {
     }
 
     private static String buildAppRestUrl() {
-        return "http://devaspace.library.yale.edu:" +  SERVER_PORT; //TODO externalize
+        return "http://159.203.105.249:" +  SERVER_PORT; //TODO externalize
     }
 
     public HttpClient getHttpClient() {

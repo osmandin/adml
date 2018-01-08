@@ -21,7 +21,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 public class Aspace {
 
-    private final Logger logger = getLogger(this.getClass());
+    private static final Logger logger = getLogger(Aspace.class);
 
     /**
      * Exports EAD and returns path
@@ -70,17 +70,22 @@ public class Aspace {
         return "";
     }
 
-    private String authenticate(final String loginUrl) {
+    public static String authenticate() {
 
         final Credentials credentials = PropertiesConfigurationUtil.getCredentials();
 
         // Make the request
         final HttpServiceUtil httpServiceUtil = new HttpServiceUtil();
 
-        final HttpPost httpPost = new HttpPost(loginUrl);
+        final HttpPost httpPost = new HttpPost(credentials.getUrl());
+
         final List<NameValuePair> nvps = new ArrayList<NameValuePair>();
         nvps.add(new BasicNameValuePair("password", credentials.getPassword()));
+        nvps.add(new BasicNameValuePair("expiring", "false"));
         httpPost.setEntity(new UrlEncodedFormEntity(nvps, Charset.defaultCharset()));
+
+        String session = "403";
+
         try {
             final HttpResponse response = httpServiceUtil.getHttpClient().execute(httpPost);
 
@@ -92,22 +97,23 @@ public class Aspace {
             String output = "";
             while ((output = br.readLine()) != null) {
                 sb.append(output);
-                //   System.out.println(sb.toString());
             }
+
+            logger.debug("String obtained:{}", sb.toString());
 
             JSONObject json = (JSONObject)new org.json.simple.parser.JSONParser().parse(sb.toString());
-            final String session =  (String) json.get("session");
+            session =  (String) json.get("session");
 
             if (session == null) {
-                //TODO
+                logger.error("Session null");
+                session = "403";
             }
 
-            return session;
         } catch (Exception e) {
             logger.error("Error auth", e);
         }
 
-        return "";
+        return session;
     }
 
 }

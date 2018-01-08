@@ -26,3 +26,4 @@ target/
 .idea/
 *.prop
 tmp/
+**/connection.props
