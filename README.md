@@ -25,7 +25,7 @@ with Tomcat JNDI connections in future.
 the IPs from "localhost" to the new address.
 
 
-Installation
+Build
 --------------
 
 The project can be built using Apache Maven, and the resulting .war file can just be dropped into Tomcat 
@@ -41,11 +41,13 @@ mvn clean install -P dev
 
 java -jar target/adml-0.0.1-SNAPSHOT.war
 
-# now visit:
-
-http://localhost:8080/adml
-
 ```
+
+Test
+--------
+
+Visit http://localhost:8080/adml.
+
 
 Server Deployment
 -------------------
@@ -60,6 +62,14 @@ Where is this service deployed?
 ---------------------------------
 - In iasc.mit.edu slash adml.
 - You can find the war file in Tomcat /opt/...
+- The app lives on a Digital Ocean Cent OS droplet.
+
+Backups
+-------
+
+The system is snapshot on a regular basis. (In future, a process will be devised to
+create database dumps and export them to an external system.)
+
 
 Users
 ------
