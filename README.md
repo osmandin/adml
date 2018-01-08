@@ -1,33 +1,67 @@
-# ADML
+# Archives Digital Media Log
+
+This webapp enables accessioning or processing archivists to create a log of media
+items within archival collections. This tool will facilitate keeping track of media
+that is in specific collection boxes/containers in aggregate terms per media format
+type. The output from this tool will enhance the collection management records in
+ArchivesSpace without needing to manually type that information again.
+
+The stack is Spring Boot/MVC/Security/Data. The tool uses an embedded database (h2) in development mode.
 
 
-The project can be built using Maven, and the resulting .war file can be dropped into Tomcat (or just launched with `java -jar`).
-The stack is Spring Boot/Spring MVC/Spring Data.
+Dependencies
+-------------
+
+- A running ArchivesSpace instance
+- Maven for building the project.
+- connection.props to specify aspace and app user credentials
+- A relational database (for production use)
+
+When deploying to production:
+
+- Supply application-prod.properties to specify database credentials. This will be replaced
+with Tomcat JNDI connections in future.
+- Grep for IPs for ASpace and production machine IP when deploying in production and change
+the IPs from "localhost" to the new address.
 
 
 Installation
 --------------
 
-
-- Install [Maven](https://maven.apache.org/) 
-(and [JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)).
-
-* Build and Launch
+The project can be built using Apache Maven, and the resulting .war file can just be dropped into Tomcat 
+(or just launched with `java -jar`).
 
 ```sh
 
 # from the folder, run the build, and package it:
 
-mvn clean install
+mvn clean install -P dev
 
 # to test it:
 
 java -jar target/adml-0.0.1-SNAPSHOT.war
 
+# now visit:
+
+http://localhost:8080/adml
+
 ```
 
+Server Deployment
+-------------------
+- Copy application-prod.properties and connection.properties to resources directory.
+- Compile the application with the -P prod flag (not -P dev)
+- Install MySql
+- Install httpd and enable reverse proxy.
+- Install Tomcat.
+- Drop the .war to webapps folder.
 
-Try it
---------------
-- Hit (for local testing): http://localhost:8080/
-- For local Tomcat: http://localhost:8080/adml
+Where is this service deployed?
+---------------------------------
+- In iasc.mit.edu slash adml.
+- You can find the war file in Tomcat /opt/...
+
+Users
+------
+
+- IASC, MIT

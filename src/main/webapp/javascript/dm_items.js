@@ -1,8 +1,12 @@
-// This JS file is temporary and will be replaced when we have a different API.
+// Note: This JS file is temporary and will be replaced when we have a different API.
 
-var asRepo = "2";
-var baseURL = "http://159.203.105.249:8089/";
-var serverURL="http://104.236.224.175/adml/token"; // change when changing IPs
+var asRepo = "2"; // ASpace repo
+
+var baseURL = "http://159.203.105.249:8089/"; // ASpace URL
+// var baseURL = "http://localhost:8089" // ASpace URL
+
+// var serverURL="http://104.236.224.175/adml/token"; // change when changing IPs
+var serverURL="http://localhost:8080/adml/token";
 var token;
 
 $(document).ready(function() {
