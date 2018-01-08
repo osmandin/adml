@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
-    <link rel="stylesheet" href="/static/stylesheets/layout.css"  th:href="@{/stylesheets/layout.css}"/>
+    <link rel="stylesheet" href="/static/stylesheets/layout.css" th:href="@{/stylesheets/layout.css}"/>
 
     <div th:replace="fragments/header :: header-css"/>
 
@@ -81,30 +81,32 @@
                 </div>
 
                 <div class="paginate">
-                    <!-- <div th:if="${items.getTotalPages() != 0}" class="form-group col-md-11 pagination-centered"> -->
+                    <div th:if="${items.getTotalPages() != 0}" class="form-group col-md-11 pagination-centered">
 
-                    <!--
-                    <div class="form-group col-md-11 pagination-centered">
 
-                        <ul class="pagination">
-                            <li th:class="${items.getNumber() == 0} ? disabled">
-                                <a class="pageLink"
-                                   th:href="@{/results(pageSize=${selectedPageSize}, page=${items.getNumber()}, content=${search.content}, keywordOption=${search.keywordOption})}">&larr;</a>
-                            </li>
-                            <li th:class="${items.getNumber() == (page - 1)} ? 'active pointer-disabled'"
-                                th:each="page : ${#numbers.sequence(pager.getStartPage(), pager.getEndPage())}">
-                                <a class="pageLink"
-                                   th:href="@{/results(pageSize=${selectedPageSize}, page=${page}, content=${search.content}, keywordOption=${search.keywordOption})}"
-                                   th:text="${page}"></a>
-                            </li>
-                            <li th:class="${items.getNumber() + 1 == items.getTotalPages()} ? disabled">
-                                <a class="pageLink"
-                                   th:href="@{/results(pageSize=${selectedPageSize}, page=${items.getNumber() + 2}, content=${search.content}, keywordOption=${search.keywordOption})}">&rarr;</a>
-                            </li>
-                        </ul>
+                        <div class="form-group col-md-11 pagination-centered">
+
+                            <ul class="pagination">
+                                <li th:class="${items.getNumber() == 0} ? disabled">
+                                    <a class="pageLink"
+                                       th:href="@{/results(pageSize=${selectedPageSize}, page=${items.getNumber()}, content=${search.content}, keywordOption=${search.keywordOption})}">&larr;</a>
+                                </li>
+                                <li th:class="${items.getNumber() == (page - 1)} ? 'active pointer-disabled'"
+                                    th:each="page : ${#numbers.sequence(pager.getStartPage(), pager.getEndPage())}">
+                                    <a class="pageLink"
+                                       th:href="@{/results(pageSize=${selectedPageSize}, page=${page}, content=${search.content}, keywordOption=${search.keywordOption})}"
+                                       th:text="${page}"></a>
+                                </li>
+                                <li th:class="${items.getNumber() + 1 == items.getTotalPages()} ? disabled">
+                                    <a class="pageLink"
+                                       th:href="@{/results(pageSize=${selectedPageSize}, page=${items.getNumber() + 2}, content=${search.content}, keywordOption=${search.keywordOption})}">&rarr;</a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
-                    -->
                 </div>
+
 
                 <!--
                <div class="number">

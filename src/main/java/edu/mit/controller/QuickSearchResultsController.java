@@ -4,6 +4,7 @@ import edu.mit.domain.Item;
 import edu.mit.domain.Pager;
 import edu.mit.repository.ItemRepository;
 import edu.mit.service.ItemService;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,16 +21,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 
 @Controller
 public class QuickSearchResultsController {
 
     private static final int BUTTONS_TO_SHOW = 5;
     private static final int INITIAL_PAGE = 0;
-    private static final int INITIAL_PAGE_SIZE = 25;
-    private static final int[] PAGE_SIZES = {25, 50, 100};
+    private static final int INITIAL_PAGE_SIZE = 5;
+    private static final int[] PAGE_SIZES = {5, 10, 15};
 
     private ItemService itemService;
+
+    private final Logger logger = getLogger(this.getClass());
+
 
     @Autowired
     public QuickSearchResultsController(ItemService studentService) {
@@ -49,48 +55,25 @@ public class QuickSearchResultsController {
     @RequestMapping(value={"/", "results"}, method = RequestMethod.GET)
     public ModelAndView showItemsPage(@ModelAttribute Search search,
                                       @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                                      @RequestParam(value = "page", required = false) Integer page,
-                                      @RequestParam(value = "keywords", required = false) String keywords) {
+                                      @RequestParam(value = "page", required = false) Integer page) {
 
-        ModelAndView modelAndView = new ModelAndView("results");
-
-        int evalPageSize = pageSize == null ? INITIAL_PAGE_SIZE : pageSize;
-
-        int evalPage = (page == null || page < 1) ? INITIAL_PAGE : page - 1;
-
-        String keywordOption = search.getKeywordOption();
-        // System.out.println("Keywords option" + keywordOption);
-
-        String keywordsStr = "";
-        if (search != null && search.getContent() != null)
-            keywordsStr = search.getContent().toLowerCase();
-
-        // System.out.println("Keywords:" + keywordsStr);
-
-
-
-        // Retrieval of actual content
-        //final Page<Item> results = itemService.findAll(spec, new PageRequest(evalPage, evalPageSize,
-        //        Sort.Direction.ASC, "fullName", "title"));
-
-        PageRequest p = new PageRequest(evalPage, evalPageSize,
+        final ModelAndView modelAndView = new ModelAndView("results");
+        final int evalPageSize = pageSize == null ? INITIAL_PAGE_SIZE : pageSize;
+        final int evalPage = (page == null || page < 1) ? INITIAL_PAGE : page - 1;
+        final PageRequest p = new PageRequest(evalPage, evalPageSize,
                 Sort.Direction.ASC, "itemId", "format");
-
         final Page<Item> results = itemRepository.findAll(p);
 
         if (results == null) {
-            System.out.println("Results null");
+            logger.info("No results found.");
         }
 
         final Pager pager = new Pager(results.getTotalPages(), results.getNumber(), BUTTONS_TO_SHOW);
-
 
         modelAndView.addObject("items", results);
         modelAndView.addObject("selectedPageSize", evalPageSize);
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
-        modelAndView.addObject("keywords", keywords);
-        modelAndView.addObject("keywordsOption", keywordOption);
         modelAndView.addObject("numberResults", results.getTotalElements());
         return modelAndView;
     }
