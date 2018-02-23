@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class HttpServiceUtil {
 
+    public static final String ASPACE_URL = "http://159.203.105.249:";
+
     private final PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
 
     private HttpClient httpClient;
@@ -54,7 +56,7 @@ public class HttpServiceUtil {
     }
 
     private static String buildAppRestUrl() {
-        return "http://159.203.105.249:" +  SERVER_PORT; //TODO externalize
+        return ASPACE_URL +  SERVER_PORT;
     }
 
     public HttpClient getHttpClient() {
