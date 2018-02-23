@@ -14,7 +14,7 @@ Dependencies
 
 - A running ArchivesSpace instance
 - Maven for building the project.
-- `connection.props` to specify ArchivesSpace and app user credentials
+- `connection.props` (format below) to specify ArchivesSpace API and app user credentials
 - A relational database (for production use)
 
 When deploying to production:
@@ -23,6 +23,18 @@ When deploying to production:
 with Tomcat JNDI connections in future.
 - Grep for IPs for ASpace and production machine IP when deploying in production and change
 the IPs from `localhost` to the new address.
+
+Configuration
+---------------
+
+Make sure you have connection.props as follows for ASpace lookup and user credentials:
+
+```sh
+login_password=
+login_url=
+app_username=
+app_password=
+```
 
 
 Build
@@ -69,6 +81,10 @@ spring.datasource.url=
 spring.datasource.username=
 spring.datasource.password=
 ```
+
+Also ensure that the connection.props points to the right ASpace IP.
+
+
 Here's how you build and deploy the .war:
 
 ```sh
@@ -88,13 +104,11 @@ scp -i ~/.digitalocean/id_rsa target/adml-0.0.1-SNAPSHOT.war user@ip:/path
 Visit `iasc.mit.edu/admin/login`.
 
 
-Server Deployment
+Server Setup
 -------------------
-- Copy `application-prod.properties` and `connection.properties` to resources directory.
-- Compile the application with the `-P prod` flag (not `-P dev`)
 - Install MySql
 - Install httpd and enable reverse proxy.
-- Install Tomcat 8 (use the latest).
+- Install Tomcat 8+
 - Drop the .war to webapps folder.
 
 Where is this service deployed?
