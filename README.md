@@ -49,6 +49,45 @@ Test
 Visit `http://localhost:8080/adml`.
 
 
+Production
+--------
+
+Change ArchivesSpace URL in dm_items.js.
+Change application.properties so that Spring Boot picks up the production environment.
+Make sure you have application-prod.properties which has the following format:
+
+
+```sh
+spring.thymeleaf.cache=false
+server.contextPath=/adml
+server.port=8080
+logging.level.org.springframework.web: DEBUG
+
+# for mysql
+spring.jpa.hibernate.ddl-auto=validate
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+```
+Here's how you build and deploy the .war:
+
+```sh
+# change application.properties with line spring.profiles.active=prod
+# so that it picks up application-prod.properties
+
+# from the folder, run the build, and package it:
+
+mvn clean install -P prod
+
+# copy the file to server as necessary
+
+scp -i ~/.digitalocean/id_rsa target/adml-0.0.1-SNAPSHOT.war user@ip:/path
+
+```
+
+Visit `iasc.mit.edu/admin/login`.
+
+
 Server Deployment
 -------------------
 - Copy `application-prod.properties` and `connection.properties` to resources directory.
