@@ -11,6 +11,9 @@ var token;
 
 $(document).ready(function() {
 
+    // test call
+    // console.log(getPropertyRecursive( myobj, 'test' ));
+
     $.get( serverURL, function(data){
         token = data;
         // console.log(token);
@@ -77,7 +80,48 @@ function getData(uri) {
                 // alert("archival object")
                 $('#component').val(data['display_string'])
                 getData(data["resource"]["ref"]);
+                console.log(getPropertyRecursive( data['instances'][0], 'indicator_1' ));
+                var abc = getPropertyRecursive(data['instances'][0], 'indicator_1');
+                console.log(abc[0]["value"]); // box
+                $('#box').val(abc[0]["value"]);
             }
         }
     });
 }
+
+function traverse(obj,func, parent) {
+    for (i in obj){
+        func.apply(this,[i,obj[i],parent]);
+        if (obj[i] instanceof Object && !(obj[i] instanceof Array)) {
+            traverse(obj[i],func, i);
+        }
+    }
+}
+
+function getPropertyRecursive(obj, property){
+    var acc = [];
+    traverse(obj, function(key, value, parent){
+        if(key === property){
+            acc.push({parent: parent, value: value});
+        }
+    });
+    return acc;
+}
+
+// test json object:
+var myobj = {
+    boo :'1',
+    bo1 :'1',
+    bo2 : {
+        boo :'2',
+        test :'2',
+        bo3 : {
+            bar1: '3',
+            bar2: '3',
+            bar3: '3',
+            test: '3',
+            bar4: '3',
+        }
+    },
+    boo :'1',
+};

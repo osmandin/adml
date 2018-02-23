@@ -59,6 +59,7 @@
                             <th>Transfer Status</th>
                             <th>Parent Component</th>
                             <th>Parent Resource</th>
+                            <th>Box</th>
                             <th>Updated</th>
                         </tr>
                         <tr th:each="item : ${items}" style="cursor: pointer"
@@ -68,6 +69,8 @@
                             <td th:text="${item.transferStatus}"></td>
                             <td th:text="${item.component}"></td>
                             <td th:text="${item.resource}"></td>
+                            <td th:text="${item.box}"></td>
+
 
                             <!--
                             <td th:textitemrson.disposition}"></td>

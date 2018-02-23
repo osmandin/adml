@@ -48,6 +48,9 @@ public class Item {
     @Column(name = "Component")
     private String component;
 
+    @Column(name = "Box")
+    private String box;
+
     private String content;
 
     public Item() {
@@ -155,6 +158,14 @@ public class Item {
 
     public void setRefid(String refid) {
         this.refid = refid;
+    }
+
+    public String getBox() {
+        return box;
+    }
+
+    public void setBox(String box) {
+        this.box = box;
     }
 
     @Override
