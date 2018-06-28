@@ -31,7 +31,7 @@ public class DatabaseInitializer {
      */
     @PostConstruct
     public void populateDatabase() {
-
+        //logger.warn("Application booting... OK");
         logger.debug("Initialize database here if you want to . . .");
 
     }

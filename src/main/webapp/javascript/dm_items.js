@@ -1,12 +1,13 @@
 // Note: This JS file is temporary and will be replaced when we have a different API.
 
-var asRepo = "2"; // ASpace repo
+var asRepo = "1"; // ASpace repo
 
-var baseURL = "http://159.203.105.249:8089/"; // ASpace URL
+//var baseURL = "http://159.203.105.249:8089/"; // ASpace URL
 // var baseURL = "http://localhost:8089" // ASpace URL
+var baseURL="http://emmastaff-lib.mit.edu:8089";
 
-// var serverURL="http://104.236.224.175/adml/token"; // change when changing IPs
-var serverURL="http://localhost:8080/adml/token";
+var serverURL="https://iasc.mit.edu/adml/token"; // change when changing IPs
+//var serverURL="http://localhost:8080/adml/token";
 var token;
 
 $(document).ready(function() {
@@ -16,14 +17,14 @@ $(document).ready(function() {
 
     $.get( serverURL, function(data){
         token = data;
-        // console.log(token);
+        console.log("Got token OK");
     }).fail(function() {
         alert("Error doing a lookup.");
     });
 
     $('#find_in_as').click(function () {
         //e.preventDefault();
-        // alert("loaded");
+        console.log("loaded");
         refid = $('#refID').val();
         var params = "ref_id[]=" + refid;
         getResults(params, refid);

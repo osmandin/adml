@@ -110,7 +110,7 @@ public class Aspace {
             }
 
         } catch (Exception e) {
-            logger.error("Error auth", e);
+            logger.error("Error authenticating to or contacting:{}", credentials.getUrl(), e);
         }
 
         return session;

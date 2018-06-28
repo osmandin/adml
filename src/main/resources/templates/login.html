@@ -6,6 +6,15 @@
 
     <div th:replace="fragments/header :: header-css"/>
 </head>
+
+
+<script type="text/javascript">
+    if (location.protocol != 'https:')
+    {
+        location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+    }
+</script>
+
 <body>
 
 <div th:replace="mit/header :: header"/>
@@ -14,8 +23,13 @@
 
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-3">
-            <form th:action="@{/login}" method="post">
-                <fieldset>
+            <!-- <form th:action="login" method="post" th:if="${session.safe == 'true'}" th:unless="${session == null}"> -->
+
+            <form th:action="login" method="post">
+
+
+
+            <fieldset>
 
                     <div th:if="${param.error}">
                         <div class="alert alert-danger">
@@ -26,6 +40,10 @@
                         <div class="alert alert-info">
                             You have been logged out.
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <!-- <p th:text="${session.safe}" th:unless="${session == null}">...</p> -->
                     </div>
 
                     <div class="form-group">
@@ -46,6 +64,10 @@
                     </div>
                 </fieldset>
             </form>
+
+
+           <!-- <a href="https://iasc.mit.edu/adml/login" th:if="${session.safe == 'false'}" th:unless="${session == null}"> Please log in to </a> -->
+
         </div>
     </div>
 

@@ -17,6 +17,13 @@
 
     <div th:replace="fragments/header :: header-css"/>
 
+    <script type="text/javascript">
+        if (location.protocol != 'https:')
+        {
+            location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+        }
+    </script>
+
 
 </head>
 <body class="app-thing">
