@@ -16,7 +16,7 @@ public class LoginController {
     private final Logger logger = getLogger(this.getClass());
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login1", method = RequestMethod.GET)
     public String greetingForm(final Model model) {
         //model.addAttribute("item", new Item());
         //model.addAttribute("username", username);

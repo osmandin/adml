@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +56,7 @@ public class QuickSearchResultsController {
     @RequestMapping(value={"/", "results"}, method = RequestMethod.GET)
     public ModelAndView showItemsPage(@ModelAttribute Search search,
                                       @RequestParam(value = "pageSize", required = false) Integer pageSize,
-                                      @RequestParam(value = "page", required = false) Integer page) {
+                                      @RequestParam(value = "page", required = false) Integer page, HttpServletRequest httpServletRequest) {
 
         final ModelAndView modelAndView = new ModelAndView("results");
         final int evalPageSize = pageSize == null ? INITIAL_PAGE_SIZE : pageSize;
@@ -75,6 +76,21 @@ public class QuickSearchResultsController {
         modelAndView.addObject("pageSizes", PAGE_SIZES);
         modelAndView.addObject("pager", pager);
         modelAndView.addObject("numberResults", results.getTotalElements());
+
+        // Do look up here:
+
+        final String email = (String) httpServletRequest.getAttribute("mail");
+
+        //TODO externalize
+        if (email.equals("osmandin@mit.edu") || email.equals("smithkr@mit.edu") || email.equals("carrano@mit.edu")) {
+            modelAndView.addObject("access", "yes");
+            logger.info("Access OK");
+        } else {
+            modelAndView.addObject("access", "no");
+            logger.info("Access failed");
+        }
+
+
         return modelAndView;
     }
 

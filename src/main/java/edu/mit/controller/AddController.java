@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -40,9 +41,7 @@ public class AddController {
     private ItemRepository itemRepository;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public Model greetingForm(final Model model) {
-
-        logger.info("Adding page");
+    public Model greetingForm(final Model model, HttpServletRequest httpServletRequest) {
 
         final Item item = new Item();
 
@@ -68,6 +67,23 @@ public class AddController {
         model.addAttribute("disposition", itemDisposition);
 
         model.addAttribute("item", item);
+
+        logger.info("Email Attribute from HTTP{} ", httpServletRequest.getAttribute("mail"));
+
+
+        // Do look up here:
+
+        final String email = (String) httpServletRequest.getAttribute("mail");
+
+        if (email.equals("osmandin@mit.edu") || email.equals("smithkr@mit.edu") || email.equals("carrano@mit.edu")) {
+            model.addAttribute("access", "yes");
+            logger.info("Access OK");
+        } else {
+            model.addAttribute("access", "no");
+            logger.info("Access failed");
+        }
+
+
         return model;
 
     }

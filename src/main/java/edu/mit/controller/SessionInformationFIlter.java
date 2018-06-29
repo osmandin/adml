@@ -20,13 +20,12 @@ import java.io.IOException;
 import java.util.Enumeration;
 
 /**
- * Example filter, used to set session variables
+ * Debubbing filter, used to set session variables
  */
 
-@Component
+//@Component
 @Order(1)
 @WebFilter(urlPatterns = "/")
-@Deprecated
 public class SessionInformationFIlter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(SessionInformationFIlter.class);
 
@@ -84,7 +83,6 @@ public class SessionInformationFIlter implements Filter {
             }
         }
 
-        logger.info("Session Information:");
 
         Enumeration<String> sessionNames = session.getAttributeNames();
 
@@ -99,7 +97,6 @@ public class SessionInformationFIlter implements Filter {
 
         final Enumeration<String> attributeNames = httpServletRequest.getAttributeNames();
 
-        logger.info("Attribute Information:");
 
         while (attributeNames.hasMoreElements()) {
             try {
@@ -112,13 +109,9 @@ public class SessionInformationFIlter implements Filter {
 
         // Information from TouchStone:
 
-        //logger.info("Attrbibute:{}{}", "ATTRBIUTE: ", httpServletRequest.getAttribute("AJP_mail"));
-        logger.info("Attrbibute:{}{}", "ATTRBIUTE: ", httpServletRequest.getAttribute("displayName"));
-        logger.info("Attrbibute:{}{}", "ATTRBIUTE: ", httpServletRequest.getAttribute("mail"));
-        logger.info("Attrbibute:{}{}", "ATTRBIUTE: ", httpServletRequest.getAttribute("nickname"));
-
-
-
+        logger.info("Touchstone Attrib:{}", httpServletRequest.getAttribute("displayName"));
+        logger.info("Touchstone Attrib:{}", httpServletRequest.getAttribute("mail"));
+        logger.info("Touchstone Attrib:{}", httpServletRequest.getAttribute("nickname"));
 
 
         filterChain.doFilter(servletRequest, servletResponse);
