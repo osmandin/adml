@@ -23,7 +23,7 @@ import java.util.Enumeration;
  * Example filter, used to set session variables
  */
 
-//@Component
+@Component
 @Order(1)
 @WebFilter(urlPatterns = "/")
 @Deprecated
@@ -55,6 +55,8 @@ public class SessionInformationFIlter implements Filter {
         }
 
 
+        logger.info("Header Information:");
+
         if (headerNames != null) {
             while (headerNames.hasMoreElements()) {
                 String s = headerNames.nextElement();
@@ -82,6 +84,8 @@ public class SessionInformationFIlter implements Filter {
             }
         }
 
+        logger.info("Session Information:");
+
         Enumeration<String> sessionNames = session.getAttributeNames();
 
         while (sessionNames.hasMoreElements()) {
@@ -92,6 +96,30 @@ public class SessionInformationFIlter implements Filter {
             } catch (Exception e) {
             }
         }
+
+        final Enumeration<String> attributeNames = httpServletRequest.getAttributeNames();
+
+        logger.info("Attribute Information:");
+
+        while (attributeNames.hasMoreElements()) {
+            try {
+                String s = attributeNames.nextElement();
+                String v = (String) httpServletRequest.getAttribute(s);
+                logger.info("Attribute element:{} {}", s, v);
+            } catch (Exception e) {
+            }
+        }
+
+        // Information from TouchStone:
+
+        //logger.info("Attrbibute:{}{}", "ATTRBIUTE: ", httpServletRequest.getAttribute("AJP_mail"));
+        logger.info("Attrbibute:{}{}", "ATTRBIUTE: ", httpServletRequest.getAttribute("displayName"));
+        logger.info("Attrbibute:{}{}", "ATTRBIUTE: ", httpServletRequest.getAttribute("mail"));
+        logger.info("Attrbibute:{}{}", "ATTRBIUTE: ", httpServletRequest.getAttribute("nickname"));
+
+
+
+
 
         filterChain.doFilter(servletRequest, servletResponse);
     }
