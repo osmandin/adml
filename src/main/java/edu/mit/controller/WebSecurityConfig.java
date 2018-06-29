@@ -21,13 +21,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
 
-        http.
+/*        http.
         authorizeRequests()
                 .antMatchers("/", "/add**","/singleitem**", "/results").hasRole("USER").and().formLogin()
-                .loginPage("/login").and().logout().permitAll();
+                .loginPage("/login").and().logout().permitAll();*/
 
 
-        //http.requiresChannel().antMatchers("/login", "/").requiresSecure();
+        //http.requiresChannel().antMatchers("/").requiresSecure();
 
         //http.requiresChannel().anyRequest().requiresSecure();
         http.portMapper().http(8080).mapsTo(443);
