@@ -26,5 +26,5 @@ target/
 .idea/
 *.prop
 tmp/
-**/connection.props
+src/main/resources/connection.properties
 **/application-prod.properties
