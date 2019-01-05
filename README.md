@@ -1,12 +1,13 @@
 # Archives Digital Media Log
 
 This webapp enables accessioning or processing archivists to create a log of media
-items within archival collections. This tool will facilitate keeping track of media
+items within archival collections. The tool will facilitate keeping track of media
 that is in specific collection boxes/containers in aggregate terms per media format
 type. The output from this tool will enhance the collection management records in
 ArchivesSpace without needing to manually type that information again.
 
-The stack is Spring Boot/MVC/Security/Data. The tool uses an embedded database (h2) in development mode.
+The stack is Spring Boot/MVC/Security/Data. 
+The tool uses an embedded database (h2) in development mode.
 
 
 Dependencies
@@ -15,6 +16,7 @@ Dependencies
 - A running ArchivesSpace instance
 - Maven for building the project.
 - `connection.props` (format below) to specify ArchivesSpace API and app user credentials
+- `application-prod.properties` (modeled on application.properties for production use)
 - A relational database (for production use)
 
 When deploying to production:
@@ -27,7 +29,7 @@ the IPs from `localhost` to the new address.
 Configuration
 ---------------
 
-Make sure you have connection.props as follows for ASpace lookup and user credentials:
+Make sure you have connection.props in the following format for ASpace lookup and user credentials:
 
 ```sh
 login_password=
@@ -58,14 +60,14 @@ java -jar target/adml-0.0.1-SNAPSHOT.war
 Test
 --------
 
-Visit `http://localhost:8080/adml`.
+Confirm `http://localhost:8080/adml` works.
 
 
-Production
---------
+Production Setup Details
+------------------------
 
-Change ArchivesSpace URL in dm_items.js.
-Change application.properties so that Spring Boot picks up the production environment.
+Change ArchivesSpace URL in dm_items.js (to match properties file).
+Change application.properties so that Spring Boot picks up the production environment (from debug to prod).
 Make sure you have application-prod.properties which has the following format:
 
 
@@ -80,9 +82,15 @@ spring.jpa.hibernate.ddl-auto=validate
 spring.datasource.url=
 spring.datasource.username=
 spring.datasource.password=
+
+# other:
+
+app.email=[email of users allowed access to the application]
+app.ip=[ip of app]
+
 ```
 
-Also ensure that the connection.props points to the right ASpace IP.
+Ensure that the connection.props file points to the right ASpace IP.
 
 
 Here's how you build and deploy the .war:
@@ -113,9 +121,9 @@ Server Setup
 
 Where is this service deployed?
 ---------------------------------
-- In `iasc.mit.edu` slash `adml`.
-- You can find the war file in Tomcat `/opt/...`
+- `iasc.mit.edu` slash `adml`.
 - The app lives on a Digital Ocean Cent OS droplet.
+- You can find the war file in Tomcat `/opt/...`
 
 Backups
 -------
@@ -127,4 +135,4 @@ create database dumps and export them to an external system.)
 Users
 ------
 
-- IASC, MIT
+- IASC (MIT)
