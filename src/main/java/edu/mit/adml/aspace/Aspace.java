@@ -89,7 +89,7 @@ public class Aspace {
         try {
             final HttpResponse response = httpServiceUtil.getHttpClient().execute(httpPost);
 
-            logger.debug("Auth handshake status:{}", response.getStatusLine());
+            logger.info("Auth handshake status:{}", response.getStatusLine());
 
             final BufferedReader br = new BufferedReader(
                     new InputStreamReader((response.getEntity().getContent())));
@@ -99,7 +99,7 @@ public class Aspace {
                 sb.append(output);
             }
 
-            logger.debug("String obtained:{}", sb.toString());
+            logger.info("String obtained:{}", sb.toString());
 
             JSONObject json = (JSONObject)new org.json.simple.parser.JSONParser().parse(sb.toString());
             session =  (String) json.get("session");

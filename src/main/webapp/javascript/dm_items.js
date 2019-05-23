@@ -1,10 +1,10 @@
 // Note: This JS file is temporary and will be replaced when we have a different API.
 
-var asRepo = "1"; // ASpace repo
+var asRepo = "2"; // ASpace repo
 
 //var baseURL = "http://159.203.105.249:8089/"; // ASpace URL
 // var baseURL = "http://localhost:8089" // ASpace URL
-var baseURL="http://emmastaff-lib.mit.edu:8089";
+var baseURL="https://emmastaff-lib.mit.edu";
 
 var serverURL="https://iasc.mit.edu/adml/token"; // change when changing IPs
 //var serverURL="http://localhost:8080/adml/token";
@@ -48,6 +48,7 @@ function getResults(data, refid) {
         type: "GET",
         dataType: "json",
         beforeSend: function(request) {
+            console.log("Sending request");
             request.setRequestHeader("X-ArchivesSpace-Session", token);
         },
         url: baseURL + "/repositories/"+ asRepo +"/find_by_id/archival_objects?",
@@ -60,6 +61,8 @@ function getResults(data, refid) {
                 //alert(results["archival_objects"][0]["ref"]);
                 getData(results["archival_objects"][0]["ref"]);
             }
+        },  error: function (xhr, status) {
+            console.log('Ajax error = ' + xhr.statusText);
         }
     });
 }
@@ -108,21 +111,3 @@ function getPropertyRecursive(obj, property){
     });
     return acc;
 }
-
-// test json object:
-var myobj = {
-    boo :'1',
-    bo1 :'1',
-    bo2 : {
-        boo :'2',
-        test :'2',
-        bo3 : {
-            bar1: '3',
-            bar2: '3',
-            bar3: '3',
-            test: '3',
-            bar4: '3',
-        }
-    },
-    boo :'1',
-};
