@@ -2,12 +2,13 @@
 
 var asRepo = "2"; // ASpace repo
 
-//var baseURL = "http://159.203.105.249:8089/"; // ASpace URL
+//var baseURL = "http://159.203.105.249:8089/"; // ASpace test server URL
 // var baseURL = "http://localhost:8089" // ASpace URL
-var baseURL="https://emmastaff-lib.mit.edu";
+var baseURL="https://iasc.mit.edu/adml/api"
+//var baseURL="https://emmastaff-lib.mit.edu/api"; // production IASC url
 
 var serverURL="https://iasc.mit.edu/adml/token"; // change when changing IPs
-//var serverURL="http://localhost:8080/adml/token";
+//var serverURL="http://localhost:8080/adml/token"; // for local machine testing
 var token;
 
 $(document).ready(function() {
@@ -17,7 +18,8 @@ $(document).ready(function() {
 
     $.get( serverURL, function(data){
         token = data;
-        console.log("Got token OK");
+        console.log("Got token from iasc server OK.");
+        // console.log(token);
     }).fail(function() {
         alert("Error doing a lookup.");
     });
@@ -27,6 +29,7 @@ $(document).ready(function() {
         console.log("loaded");
         refid = $('#refID').val();
         var params = "ref_id[]=" + refid;
+        //getLocation(params, refid);
         getResults(params, refid);
     });
 
@@ -40,6 +43,26 @@ $('#find_in_as').on('click', function(e) {
     var params = "ref_id[]=" + refid;
     getResults(params, refid);
 });
+
+// Get JSON results from the AS endpoint
+function getLocation(data, refid) {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        beforeSend: function(request) {
+            console.log("Sending request for location");
+            request.setRequestHeader("X-ArchivesSpace-Session", token);
+        },
+        url: baseURL + "/locations/1",
+        data: data,
+        success: function(results) {
+            alert("ok: get results");
+            console.log(results);
+        },  error: function (xhr, status) {
+            console.log('Ajax error = ' + xhr.statusText);
+        }
+    });
+}
 
 
 // Get JSON results from the AS endpoint
