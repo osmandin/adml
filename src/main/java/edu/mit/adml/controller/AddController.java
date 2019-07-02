@@ -8,6 +8,7 @@ import edu.mit.adml.util.Util;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -25,6 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -119,24 +121,23 @@ public class AddController {
 
     }
 
+    /**
+     * Returns information from ArchivesSpace for autopopulating component and resources boxes
+     * @return ResponseBody
+     * @throws URISyntaxException
+     */
+    // TODO clean up
     @RequestMapping("/api/**")
     @ResponseBody
-    public ResponseEntity mirrorRest(@RequestBody(required = false) String body,
-                                     HttpMethod method, HttpServletRequest request, HttpServletResponse response)
+    public ResponseEntity proxyASpace(@RequestBody(required = false) String body,
+                                      HttpMethod method, HttpServletRequest request, HttpServletResponse servletResponse)
             throws URISyntaxException {
-        //String requestUrl = request.getRequestURI().replace("/adml/api", "");
-        String requestUrl = request.getRequestURI().replace("/adml", "");
+        // This ensures that the app path is not passed to ASpace
+        final String requestUrl = request.getRequestURI().replace("/adml", "");
 
         logger.debug("Set connection:{}", request.getHeader("Connection"));
 
-
-        //logger.info("Here for:{}", requestUrl);
-
-
-        //URI uri = new URI("http", null, server, port, null, null, null);
-
         URI uri = new URI("https", server, null, null);
-
 
         uri = UriComponentsBuilder.fromUri(uri)
                 .path(requestUrl)
@@ -144,63 +145,53 @@ public class AddController {
                 .build(false).toUri();
 
 
-        HttpHeaders headers = new HttpHeaders();
-        Enumeration<String> headerNames = request.getHeaderNames();
+        final HttpHeaders headers = new HttpHeaders();
+        final Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
-            String headerName = headerNames.nextElement();
-            logger.debug("Considering header:" + headerName);
+            final String headerName = headerNames.nextElement();
 
-            headers.set(headerName, request.getHeader(headerName));
+            // Note: Setting the headers to avoid gzip, keep-alive, chunked response!
 
             if (headerName.equalsIgnoreCase("Connection")) {
-                logger.debug("Setting connection header to close:");
+                logger.debug("Setting connection header to close to avoid chunked response");
                 headers.set(headerName, "close");
             }
 
-            if (headerName.equalsIgnoreCase("Accept-Encoding")) {
-                logger.debug("Setting accept encoding to close:");
+            else if (headerName.equalsIgnoreCase("Accept-Encoding")) {
+                logger.debug("Setting accept encoding to identity to avoid chunked response");
                 headers.set(headerName, "identity");
+            }
+
+            else {
+                headers.set(headerName, request.getHeader(headerName));
             }
         }
 
-        HttpEntity<String> httpEntity = new HttpEntity<>(body, headers);
+        // Send the request to ASpace and send the response back to the client
 
-        HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory(
-                HttpClientBuilder.create().build());
+        final HttpEntity<String> httpEntity = new HttpEntity<>(body, headers);
 
-        // https://stackoverflow.com/questions/34415144/how-to-parse-gzip-encoded-response-with-resttemplate-from-spring-web
-        RestTemplate restTemplate = new RestTemplate();
-
-        //restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-
-        JSONParser parser = new JSONParser();
-
+        final RestTemplate restTemplate = new RestTemplate();
 
         try {
             final ResponseEntity rb = restTemplate.exchange(uri, method, httpEntity, String.class);
-            logger.debug("Response from the server:" + rb.toString());
+            logger.debug("Raw response from the server:" + rb.toString());
 
-            // Parses and reads JSON:
+            // For "resources", just return the title (otherwise it was causing a truncated output error on the jquery side)
             try {
                 if (requestUrl.contains("resources")) {
-                    logger.debug("Just will returning resource title");
-                    /*JSONObject jsonObject = (JSONObject) parser.parse(rb.getBody().toString().
-                            replace("<200,", "").replace("]}", "")
-                    .replaceAll("http://", "http"));*/
-
+                    final JSONParser parser = new JSONParser();
+                    logger.debug("Parsing just the resource title");
                     final JSONObject jsonObject = (JSONObject) parser.parse(rb.getBody().toString());
-
-                    logger.debug("Parsed json object");
-
-                    logger.debug("Extracted title" + jsonObject.get("title"));
-
-                    JSONObject newJsonObject = new JSONObject();
-                    newJsonObject.put("title", jsonObject.get("title"));
-
-                    return new ResponseEntity<String>(newJsonObject.toJSONString(), HttpStatus.OK);
+                    logger.debug("Parsed the response as JSON");
+                    logger.debug("Title from the parsed JSON:" + jsonObject.get("title"));
+                    final JSONObject response = new JSONObject();
+                    response.put("title", jsonObject.get("title")); // this is the components field in the webapp
+                    response.put("type", "adml_resource"); // to indicate what we are returning
+                    return new ResponseEntity<>(response.toJSONString(), HttpStatus.OK);
                 }
-            } catch (Exception e) {
-                logger.error("Error reading or returning json:" + e);
+            } catch (ParseException e) {
+                logger.error("Error reading JSON for resource:{} {}", requestUrl, e);
             }
 
             return rb;

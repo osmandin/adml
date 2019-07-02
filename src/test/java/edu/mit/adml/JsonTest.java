@@ -16,7 +16,7 @@ public class JsonTest {
 
     @Test
     public void test() throws IOException, ParseException {
-        final File initialFile = new File(JsonTest.class.getResource("/sample.json").getFile());
+        final File initialFile = new File(JsonTest.class.getResource("/resource.json").getFile());
         Reader targetReader = new FileReader(initialFile);
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = (JSONObject) parser.parse(targetReader);

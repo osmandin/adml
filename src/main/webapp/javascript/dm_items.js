@@ -1,5 +1,3 @@
-// Note: This JS file is temporary and will be replaced when we have a different API.
-
 var asRepo = "2"; // ASpace repo
 
 //var baseURL = "http://159.203.105.249:8089/"; // ASpace test server URL
@@ -18,7 +16,7 @@ $(document).ready(function() {
 
     $.get( serverURL, function(data){
         token = data;
-        console.log("Got token from iasc server OK.");
+        console.log("Got token from ADML server OK.");
         // console.log(token);
     }).fail(function() {
         alert("Error doing a lookup.");
@@ -26,17 +24,16 @@ $(document).ready(function() {
 
     $('#find_in_as').click(function () {
         //e.preventDefault();
-        console.log("loaded");
         refid = $('#refID').val();
         var params = "ref_id[]=" + refid;
-        //getLocation(params, refid);
         getResults(params, refid);
+        //getLocation(params, refid); // sample test
     });
 
 });
 
 
-// Handle click event on Find in ArchivesSpace button and delegate to getResults function
+// Handle click event on "Find in ArchivesSpace" button
 $('#find_in_as').on('click', function(e) {
     e.preventDefault();
     refid = $('#refID').val();
@@ -44,28 +41,8 @@ $('#find_in_as').on('click', function(e) {
     getResults(params, refid);
 });
 
-// Get JSON results from the AS endpoint
-function getLocation(data, refid) {
-    $.ajax({
-        type: "GET",
-        dataType: "json",
-        beforeSend: function(request) {
-            console.log("Sending request for location");
-            request.setRequestHeader("X-ArchivesSpace-Session", token);
-        },
-        url: baseURL + "/locations/1",
-        data: data,
-        success: function(results) {
-            alert("ok: get results");
-            console.log(results);
-        },  error: function (xhr, status) {
-            console.log('Ajax error = ' + xhr.statusText);
-        }
-    });
-}
 
-
-// Get JSON results from the AS endpoint
+// Fetches archival object ID by ref ID
 function getResults(data, refid) {
     $.ajax({
         type: "GET",
@@ -73,19 +50,15 @@ function getResults(data, refid) {
         beforeSend: function(request) {
             console.log("Sending request");
             request.setRequestHeader("X-ArchivesSpace-Session", token);
-            request.setRequestHeader("Accept-Encoding", "identity");
             //request.setRequestHeader('Accept','application/json; charset=utf-8');
-            request.setRequestHeader("Connection", "close");
         },
         url: baseURL + "/repositories/"+ asRepo +"/find_by_id/archival_objects?",
         data: data,
         success: function(results) {
-            // alert("ok: get results");
-            console.log("got results");
+            console.log("Fetched archival object by id");
             if (results["archival_objects"].length < 1) {
-                console.log("Sorry, I couldn't find anything for " + refid);
+                console.log("Sorry, I couldn't find anything for: " + refid);
             } else {
-                //alert(results["archival_objects"][0]["ref"]);
                 getData(results["archival_objects"][0]["ref"]);
             }
         },  error: function (xhr, status) {
@@ -94,30 +67,27 @@ function getResults(data, refid) {
     });
 }
 
-// Fetches JSON from an ArchivesSpace URI
+// Fetches component and resource data and box info or a particular ref ID
 function getData(uri) {
     $.ajax({
         type: "GET",
         dataType: "json",
         beforeSend: function(request) {
-            console.log(uri);
-            console.log(baseURL + uri);
+            console.log("Sending request to:" + baseURL + uri);
             request.setRequestHeader("X-ArchivesSpace-Session", token);
-            request.setRequestHeader("Accept-Encoding", "identity");
             request.setRequestHeader('Accept','application/json; charset=utf-8');
-            request.setRequestHeader("Connection", "close");
         },
         url: baseURL + uri,
         success: function(data) {
             // alert("ok: get data call")
-            console.log("in getData()");
+            console.log("Entering getData()");
             if (data["jsonmodel_type"] == "resource") {
-                console.log("resource");
+                console.log("This is a resource");
                 $('#resource').val(data["title"] + ' (' + data["id_0"] + ')');
             } else if (data["jsonmodel_type"] == "archival_object") {
                 console.log("This is an archival object");
                 $('#component').val(data['display_string'])
-                console.log("Now digging further");
+                console.log("Getting info regarding resource ref");
                 getData(data["resource"]["ref"]);
                 //console.log(getPropertyRecursive( data['instances'][0], 'indicator_1' ));
                 //var abc = getPropertyRecursive(data['instances'][0], 'indicator_1');
@@ -125,13 +95,15 @@ function getData(uri) {
                 //onsole.log(abc[0]);
                 //console.log(abc[0]["value"]); // box
                 //$('#box').val(abc[0]["value"]);
-            } else {
-                console.log("Unknown data type"); // osm: just the title
+            } else if (data["type"] == "adml_resource") {
+                // osm: just the title
                 console.log(data.toString());
                 $('#resource').val(data["title"]);
+            } else {
+                console.log("Unknown json model type");
             }
         }, error: function (xhr, status) {
-            console.log('Ajax error in getData = ' + xhr.statusText);
+            console.log('Error in getData = ' + xhr.statusText);
             console.log(status);
             console.log(xhr.responseText);
 
@@ -156,4 +128,24 @@ function getPropertyRecursive(obj, property){
         }
     });
     return acc;
+}
+
+// Sample test
+function getLocation(data, refid) {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        beforeSend: function(request) {
+            console.log("Sending request for location");
+            request.setRequestHeader("X-ArchivesSpace-Session", token);
+        },
+        url: baseURL + "/locations/1",
+        data: data,
+        success: function(results) {
+            alert("ok: get results");
+            console.log(results);
+        },  error: function (xhr, status) {
+            console.log('Ajax error = ' + xhr.statusText);
+        }
+    });
 }
