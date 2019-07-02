@@ -73,11 +73,15 @@ function getResults(data, refid) {
         beforeSend: function(request) {
             console.log("Sending request");
             request.setRequestHeader("X-ArchivesSpace-Session", token);
+            request.setRequestHeader("Accept-Encoding", "identity");
+            //request.setRequestHeader('Accept','application/json; charset=utf-8');
+            request.setRequestHeader("Connection", "close");
         },
         url: baseURL + "/repositories/"+ asRepo +"/find_by_id/archival_objects?",
         data: data,
         success: function(results) {
             // alert("ok: get results");
+            console.log("got results");
             if (results["archival_objects"].length < 1) {
                 console.log("Sorry, I couldn't find anything for " + refid);
             } else {
@@ -96,22 +100,40 @@ function getData(uri) {
         type: "GET",
         dataType: "json",
         beforeSend: function(request) {
+            console.log(uri);
+            console.log(baseURL + uri);
             request.setRequestHeader("X-ArchivesSpace-Session", token);
+            request.setRequestHeader("Accept-Encoding", "identity");
+            request.setRequestHeader('Accept','application/json; charset=utf-8');
+            request.setRequestHeader("Connection", "close");
         },
         url: baseURL + uri,
         success: function(data) {
             // alert("ok: get data call")
+            console.log("in getData()");
             if (data["jsonmodel_type"] == "resource") {
+                console.log("resource");
                 $('#resource').val(data["title"] + ' (' + data["id_0"] + ')');
             } else if (data["jsonmodel_type"] == "archival_object") {
-                // alert("archival object")
+                console.log("This is an archival object");
                 $('#component').val(data['display_string'])
+                console.log("Now digging further");
                 getData(data["resource"]["ref"]);
-                console.log(getPropertyRecursive( data['instances'][0], 'indicator_1' ));
-                var abc = getPropertyRecursive(data['instances'][0], 'indicator_1');
-                console.log(abc[0]["value"]); // box
-                $('#box').val(abc[0]["value"]);
+                //console.log(getPropertyRecursive( data['instances'][0], 'indicator_1' ));
+                //var abc = getPropertyRecursive(data['instances'][0], 'indicator_1');
+                //console.log(abc);
+                //onsole.log(abc[0]);
+                //console.log(abc[0]["value"]); // box
+                //$('#box').val(abc[0]["value"]);
+            } else {
+                console.log("Unknown data type");
+                console.log(data["jsonmodel_type"]);
             }
+        }, error: function (xhr, status) {
+            console.log('Ajax error in getData = ' + xhr.statusText);
+            console.log(status);
+            console.log(xhr.responseText);
+
         }
     });
 }

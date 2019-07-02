@@ -132,6 +132,9 @@ public class AddController {
         //String requestUrl = request.getRequestURI().replace("/adml/api", "");
         String requestUrl = request.getRequestURI().replace("/adml", "");
 
+        logger.debug("Set connection:{}", request.getHeader("Connection"));
+
+
         //logger.info("Here for:{}", requestUrl);
 
 
@@ -151,7 +154,19 @@ public class AddController {
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             String headerName = headerNames.nextElement();
+            logger.debug("Considering header:" + headerName);
+
             headers.set(headerName, request.getHeader(headerName));
+
+            if (headerName.equalsIgnoreCase("Connection")) {
+                logger.debug("Setting connection header to close:");
+                headers.set(headerName, "close");
+            }
+
+            if (headerName.equalsIgnoreCase("Accept-Encoding")) {
+                logger.debug("Setting accept encoding to close:");
+                headers.set(headerName, "identity");
+            }
         }
 
         HttpEntity<String> httpEntity = new HttpEntity<>(body, headers);
@@ -160,21 +175,13 @@ public class AddController {
                 HttpClientBuilder.create().build());
 
         // https://stackoverflow.com/questions/34415144/how-to-parse-gzip-encoded-response-with-resttemplate-from-spring-web
-        RestTemplate restTemplate = new RestTemplate(clientHttpRequestFactory);
+        RestTemplate restTemplate = new RestTemplate();
 
-
-        //restTemplate.setMessageConverters(getMessageConverters());
-
-        //restTemplate.getMessageConverters()
-          //      .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
-
-        restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-
-
-
+        //restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
         try {
             ResponseEntity rb = restTemplate.exchange(uri, method, httpEntity, String.class);
+
 
             logger.debug("Response from the server:" + rb.toString());
             return rb;
@@ -184,13 +191,6 @@ public class AddController {
                     .headers(e.getResponseHeaders())
                     .body(e.getResponseBodyAsString());
         }
-    }
-
-    private List<HttpMessageConverter<?>> getMessageConverters() {
-        List<HttpMessageConverter<?>> converters =
-                new ArrayList<HttpMessageConverter<?>>();
-        converters.add(new MappingJackson2HttpMessageConverter());
-        return converters;
     }
 
 }
