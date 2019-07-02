@@ -1,0 +1,686 @@
+{
+  "lock_version": 11,
+  "title": "Massachusetts Institute of Technology, Undergraduate Association records",
+  "publish": false,
+  "restrictions": false,
+  "repository_processing_note": "16 in locator",
+  "ead_id": "AC-0147",
+  "ead_location": "http://libraries.mit.edu/archives/research/collections-ac/ac147.html",
+  "finding_aid_title": "Preliminary Inventory to the Records of the Massachusetts Institute of Technology Undergraduate Association",
+  "finding_aid_note": "Level 2 + component list",
+  "created_by": "lbeattie",
+  "last_modified_by": "carrano",
+  "create_time": "2009-02-12T14:31:57Z",
+  "system_mtime": "2019-07-01T15:07:57Z",
+  "user_mtime": "2019-07-01T15:07:57Z",
+  "suppressed": false,
+  "is_slug_auto": false,
+  "id_0": "AC",
+  "id_1": "0147",
+  "language": "eng",
+  "level": "collection",
+  "finding_aid_description_rules": "dacs",
+  "finding_aid_status": "preliminary_inventory",
+  "jsonmodel_type": "resource",
+  "external_ids": [
+    {
+      "external_id": "447",
+      "source": "Archivists Toolkit Database::RESOURCE",
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "jsonmodel_type": "external_id"
+    }
+  ],
+  "subjects": [
+    {
+      "ref": "/subjects/468"
+    },
+    {
+      "ref": "/subjects/574"
+    },
+    {
+      "ref": "/subjects/1300"
+    },
+    {
+      "ref": "/subjects/258"
+    }
+  ],
+  "linked_events": [],
+  "extents": [
+    {
+      "lock_version": 0,
+      "number": "12",
+      "container_summary": "(10 record cartons, 4 manuscript boxes, 2 half manuscript boxes, 1 volume)",
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "portion": "whole",
+      "extent_type": "cubic_feet",
+      "jsonmodel_type": "extent"
+    }
+  ],
+  "dates": [
+    {
+      "lock_version": 0,
+      "begin": "1914",
+      "end": "1985",
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "date_type": "inclusive",
+      "label": "creation",
+      "jsonmodel_type": "date"
+    }
+  ],
+  "external_documents": [],
+  "rights_statements": [],
+  "linked_agents": [
+    {
+      "role": "creator",
+      "terms": [],
+      "ref": "/agents/corporate_entities/875"
+    },
+    {
+      "role": "subject",
+      "terms": [],
+      "ref": "/agents/corporate_entities/967"
+    },
+    {
+      "role": "subject",
+      "terms": [],
+      "ref": "/agents/corporate_entities/875"
+    },
+    {
+      "role": "subject",
+      "terms": [],
+      "ref": "/agents/corporate_entities/968"
+    },
+    {
+      "role": "subject",
+      "terms": [],
+      "ref": "/agents/corporate_entities/969"
+    }
+  ],
+  "revision_statements": [],
+  "instances": [
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4229"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4230"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4231"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4232"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4233"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4234"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4235"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4236"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4237"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4238"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4239"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4240"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4241"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4242"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4243"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4244"
+        }
+      }
+    },
+    {
+      "lock_version": 0,
+      "created_by": "carrano",
+      "last_modified_by": "carrano",
+      "create_time": "2019-07-01T15:07:58Z",
+      "system_mtime": "2019-07-01T15:07:58Z",
+      "user_mtime": "2019-07-01T15:07:58Z",
+      "instance_type": "mixed_materials",
+      "jsonmodel_type": "instance",
+      "is_representative": false,
+      "sub_container": {
+        "lock_version": 0,
+        "created_by": "carrano",
+        "last_modified_by": "carrano",
+        "create_time": "2019-07-01T15:07:58Z",
+        "system_mtime": "2019-07-01T15:07:58Z",
+        "user_mtime": "2019-07-01T15:07:58Z",
+        "jsonmodel_type": "sub_container",
+        "top_container": {
+          "ref": "/repositories/2/top_containers/4245"
+        }
+      }
+    }
+  ],
+  "deaccessions": [],
+  "related_accessions": [
+    {
+      "ref": "/repositories/2/accessions/1289"
+    },
+    {
+      "ref": "/repositories/2/accessions/3840"
+    },
+    {
+      "ref": "/repositories/2/accessions/919"
+    },
+    {
+      "ref": "/repositories/2/accessions/1098"
+    },
+    {
+      "ref": "/repositories/2/accessions/1667"
+    },
+    {
+      "ref": "/repositories/2/accessions/1579"
+    },
+    {
+      "ref": "/repositories/2/accessions/1313"
+    },
+    {
+      "ref": "/repositories/2/accessions/1236"
+    },
+    {
+      "ref": "/repositories/2/accessions/1011"
+    }
+  ],
+  "classifications": [],
+  "notes": [
+    {
+      "jsonmodel_type": "note_multipart",
+      "persistent_id": "62cf5237f29f9040770f96307dd6e648",
+      "label": "Access note",
+      "type": "accessrestrict",
+      "rights_restriction": {
+        "local_access_restriction_type": []
+      },
+      "subnotes": [
+        {
+          "jsonmodel_type": "note_text",
+          "content": "The collection is not yet fully processed and may need to be screened before use. In accordance with MIT policy, there may be restrictions on access to some of the records. Contact the Institute Archives for further information.",
+          "publish": true
+        }
+      ],
+      "publish": true
+    },
+    {
+      "jsonmodel_type": "note_multipart",
+      "persistent_id": "2c1a2b94167a656991fbf2910303a30c",
+      "label": "Citation ",
+      "type": "prefercite",
+      "subnotes": [
+        {
+          "jsonmodel_type": "note_text",
+          "content": "Massachusetts Institute of Technology, Undergraduate Association Records, AC 147, box X. Massachusetts Institute of Technology, Institute Archives and Special Collections, Cambridge, Massachusetts.",
+          "publish": true
+        }
+      ],
+      "publish": true
+    },
+    {
+      "jsonmodel_type": "note_singlepart",
+      "persistent_id": "d9ba3e83678356e879c4ebc58c20b733",
+      "label": "Location ",
+      "type": "physloc",
+      "content": [
+        "Materials are stored off-site. Advance notice is required for use."
+      ],
+      "publish": true
+    },
+    {
+      "jsonmodel_type": "note_multipart",
+      "persistent_id": "721f4d2b2f4bf3dcc4cc42bf785eb14e",
+      "label": "Intellectual Property Rights",
+      "type": "userestrict",
+      "rights_restriction": {
+        "local_access_restriction_type": []
+      },
+      "subnotes": [
+        {
+          "jsonmodel_type": "note_text",
+          "content": "Access to collections in the Institute Archives and Special Collections is not authorization to publish. Separate written application for permission to publish must be made to the Institute Archives. Copyright of some items in this collection may be held by respective creators, not by the creating office.",
+          "publish": true
+        }
+      ],
+      "publish": true
+    },
+    {
+      "jsonmodel_type": "note_multipart",
+      "persistent_id": "6750074de67a65c5acdf00d4556bcc5f",
+      "label": "Appraisal note",
+      "type": "appraisal",
+      "subnotes": [
+        {
+          "jsonmodel_type": "note_text",
+          "content": "Unprocessed.",
+          "publish": false
+        }
+      ],
+      "publish": false
+    },
+    {
+      "jsonmodel_type": "note_multipart",
+      "persistent_id": "428b4c5f0be23dccacab5405089e4e49",
+      "label": "Scope and Contents of the Collection",
+      "type": "scopecontent",
+      "subnotes": [
+        {
+          "jsonmodel_type": "note_text",
+          "content": "Records received in 1986, boxes 1-9, include correspondence, minutes, financial records, president's reports, and topical reports which document student government and student sponsored activities at the Massachusetts Institute of Technology.\n\nRecords received in 1989, boxes 10-11, contain administrative files including correspondence about student conferences, the Leadership Conference, and the organization Students for Struik; subject files pertaining to disarmament, the MX missile, and registration for the draft; and minutes of the General Assembly.\n\nRecords received in 1993, box 12, 1917-1957, include reports of the Institute Committee, membership lists, correspondence, Undergraduate Association president's report, and a Ways and Means Committee report on the Undergraduate Association's finances.\n\nRecords received in 1994, box 13, 1955-1967, include correspondence pertaining to activities in which the Undergraduate Association was involved; as well as administrative material, such as organizational charts and constitutions of groups under the Undergraduate Association, minutes of meetings, and memoranda.\n\nRecords received in 2002, boxes 14-15, contain budgets and financial reports for the Institute Committeeâs Budget Committee and Treasurer, covering the period 1917-1928. Also included are records of the Institute Committee and the Open House/Parent Weekend Committee for years 1964-1968.\n\n",
+          "publish": false
+        }
+      ],
+      "publish": false
+    },
+    {
+      "jsonmodel_type": "note_multipart",
+      "persistent_id": "b18b9fe953f3ed493eb083dbbcbbcd6f",
+      "label": "Scope and Contents of the Collection",
+      "type": "scopecontent",
+      "subnotes": [
+        {
+          "jsonmodel_type": "note_text",
+          "content": "During the 1950s and 1960s there was an International Program Committee whose purpose was to promote understanding of international culture and global events.  One activity was the MIT International Week.  Box 17 contains audio of one event of the 1961 International Week program, recordings of a panel disucssion titled \"Cuba Today\" discussing the Cuban revolution. ",
+          "publish": false
+        }
+      ],
+      "publish": false
+    },
+    {
+      "jsonmodel_type": "note_multipart",
+      "persistent_id": "db55ea627e695c567ee9a812e6f258a6",
+      "label": "Historical note",
+      "type": "bioghist",
+      "subnotes": [
+        {
+          "jsonmodel_type": "note_text",
+          "content": "The Massachusetts Institute of Technology Undergraduate Association (UA) is the undergraduate student governing body at the Institute. The goals of the UA include articulating students' concerns, communicating student opinion to the Institute administration, and organizing undergraduate events and activities.\n\nThe precursor to the UA was the Institute Committee (later called Inscomm), which first met on February 11, 1893. The object of the committee was to promote the welfare of the Institute at home and abroad and to form a responsible body through which communication could be made directly between students and faculty. Albert Farwell Bemis (class of 1893) organized the plan and submitted it in 1893 to the undergraduate classes. The plan was endorsed by the faculty in the same year. The committee met bi-weekly and was made up of ten members during the first term and twelve during the second, including four class presidents and two members of each class. Honorary members included the president and secretary of the Institute plus one member of the faculty. Senior and junior class presidents were president and vice president, respectively, of the committee.\n\nThe committee prepared an exhibit to represent MIT student life at the Columbian Exposition in Chicago in 1893 and decided upon the official pin and colors of the Institute.\n\nIn 1909 representation on the committee was increased by the inclusion of one delegate from each of the student professional societies, as well as one from other major activities including the Tech Show, <title render=\"italic\">The Tech</title>, <title render=\"italic\">Technique</title>, the Athletic Association, and the Technology Christian Association. As the number of extracurricular activities increased at the Institute, the need for a central governing body became evident. In 1913 an âAssociation of Undergraduates of the Massachusetts Institute of Technologyâ was established to provide a larger forum for undergraduates. Each undergraduate automatically became a member. The first meeting was held on April 9, 1914. Inscomm became the legislative and executive body of the Undergraduate Association (UA). The meetings of Inscomm remained open to all students, and its decisions were submitted to a vote of the student body upon petition.\n\nBy 1940 the functions of Inscomm had undergone significant changes. It was the charge of the committee to approve all elections, appointments, budgets, and programs relating to the conduct of business of undergraduate activities. Important committees of the UA during this period included the Budget Committee, the Election Committee, the Executive Committee, the Student Faculty Committee, and the Walker Memorial Committee.\n\nIn 1969 a new constitution for the undergraduate body, called the Unified University Proposal, was approved by a vote of the students. The proposal was intended to create a better organized presentation of student opinion to the rest of the Institute. With the acceptance of the new constitution, Inscomm ceased to exist and in its place was a General Assembly with an Executive Committee.\n\nBy the early 1970s the General Assembly was renamed the Undergraduate Association, and its governing body, the UA Council (UAC). The UAC is both the legislative and the judicial arm of the UA. It is composed of an apportioned number of students elected from different living groups. The president, vice president, secretary, and treasurer of the UA are automatically members. The UAC discusses issues, makes proposals, and has final say over UA policies and practices.\n\nThe UA committees include the Course Evaluation Guide Committee (CEG); the Judicial Review Board (JudBoard), which interprets the UA constitution and adjudicates conflicts caused by legislation of the council; the Association of Student Activities (ASA); the Student Committee on Education Policy (SCEP); the Nominations Committee (NomComm), and the Finance Board (FinBoard), which allocates funds for student activities.\n",
+          "publish": false
+        }
+      ],
+      "publish": false
+    },
+    {
+      "jsonmodel_type": "note_multipart",
+      "persistent_id": "632a6847a1927298501f81127540670e",
+      "label": "Processing Information note",
+      "type": "processinfo",
+      "subnotes": [
+        {
+          "jsonmodel_type": "note_text",
+          "content": "\n\nBox 17 of AC 147 was formerly AC 176 (MIT International Week) ; during AT clean up project in April 2015, AC 176 moved to AC 147 to be with other student International Program Committee records. accession 1988-41",
+          "publish": false
+        }
+      ],
+      "publish": false
+    },
+    {
+      "jsonmodel_type": "note_multipart",
+      "persistent_id": "b7169e67b078131fcd51434f7b61e268",
+      "type": "processinfo",
+      "subnotes": [
+        {
+          "jsonmodel_type": "note_text",
+          "content": "Some materials in this collection were initially designated as separate collections. Folders 2 and 3 of Box 15 of this collection were initially designated as the MIT Institute Committee records (MC-0192). Between 1994 and 1995, the former MC-0192 was redesignated as the MIT Institute Committee records (AC-0304). In 2002, AC-0304 was merged into the the Massachusetts Insitute of Technology, Undergraduate Association records (AC-0147). \n\nBox 17 of this collection was initially designated as the MIT International Week, \"MIT Looks at the World\" (AC-0176; accession 1988-041). In April 2015, materials from the former AC-0176 were merged into the Massachusetts Insitute of Technology, Undergraduate Association records (AC-0147).",
+          "publish": true
+        }
+      ],
+      "publish": true
+    }
+  ],
+  "uri": "/repositories/2/resources/121",
+  "repository": {
+    "ref": "/repositories/2"
+  },
+  "tree": {
+    "ref": "/repositories/2/resources/121/tree"
+  }
+}

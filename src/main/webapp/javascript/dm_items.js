@@ -126,8 +126,9 @@ function getData(uri) {
                 //console.log(abc[0]["value"]); // box
                 //$('#box').val(abc[0]["value"]);
             } else {
-                console.log("Unknown data type");
-                console.log(data["jsonmodel_type"]);
+                console.log("Unknown data type"); // osm: just the title
+                console.log(data.toString());
+                $('#resource').val(data["title"]);
             }
         }, error: function (xhr, status) {
             console.log('Ajax error in getData = ' + xhr.statusText);

@@ -1,21 +1,17 @@
 package edu.mit.adml.controller;
 
 import edu.mit.adml.DatabaseInitializer;
-import edu.mit.adml.util.Util;
 import edu.mit.adml.domain.Item;
 import edu.mit.adml.repository.ItemRepository;
 import edu.mit.adml.service.ItemService;
+import edu.mit.adml.util.Util;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,7 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.charset.Charset;
 import java.util.*;
 
 import static org.slf4j.LoggerFactory.getLogger;
@@ -149,7 +144,6 @@ public class AddController {
                 .build(false).toUri();
 
 
-
         HttpHeaders headers = new HttpHeaders();
         Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
@@ -179,14 +173,39 @@ public class AddController {
 
         //restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
+        JSONParser parser = new JSONParser();
+
+
         try {
-            ResponseEntity rb = restTemplate.exchange(uri, method, httpEntity, String.class);
-
-
+            final ResponseEntity rb = restTemplate.exchange(uri, method, httpEntity, String.class);
             logger.debug("Response from the server:" + rb.toString());
+
+            // Parses and reads JSON:
+            try {
+                if (requestUrl.contains("resources")) {
+                    logger.debug("Just will returning resource title");
+                    /*JSONObject jsonObject = (JSONObject) parser.parse(rb.getBody().toString().
+                            replace("<200,", "").replace("]}", "")
+                    .replaceAll("http://", "http"));*/
+
+                    final JSONObject jsonObject = (JSONObject) parser.parse(rb.getBody().toString());
+
+                    logger.debug("Parsed json object");
+
+                    logger.debug("Extracted title" + jsonObject.get("title"));
+
+                    JSONObject newJsonObject = new JSONObject();
+                    newJsonObject.put("title", jsonObject.get("title"));
+
+                    return new ResponseEntity<String>(newJsonObject.toJSONString(), HttpStatus.OK);
+                }
+            } catch (Exception e) {
+                logger.error("Error reading or returning json:" + e);
+            }
+
             return rb;
-        } catch(HttpStatusCodeException e) {
-            logger.debug("Error" +e);
+        } catch (HttpStatusCodeException e) {
+            logger.debug("Error" + e);
             return ResponseEntity.status(e.getRawStatusCode())
                     .headers(e.getResponseHeaders())
                     .body(e.getResponseBodyAsString());
