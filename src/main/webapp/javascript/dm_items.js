@@ -89,12 +89,13 @@ function getData(uri) {
                 $('#component').val(data['display_string'])
                 console.log("Getting info regarding resource ref");
                 getData(data["resource"]["ref"]);
-                //console.log(getPropertyRecursive( data['instances'][0], 'indicator_1' ));
-                //var abc = getPropertyRecursive(data['instances'][0], 'indicator_1');
+                console.log("Extracting box info");
+                console.log(getPropertyRecursive( data['instances'][0], 'indicator_1' ));
+                var abc = getPropertyRecursive(data['instances'][0], 'indicator_1');
                 //console.log(abc);
                 //onsole.log(abc[0]);
                 //console.log(abc[0]["value"]); // box
-                //$('#box').val(abc[0]["value"]);
+                $('#box').val(abc[0]["value"]);
             } else if (data["type"] == "adml_resource") {
                 // osm: just the title
                 console.log(data.toString());

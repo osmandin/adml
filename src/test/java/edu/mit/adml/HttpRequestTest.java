@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@Ignore
 public class HttpRequestTest {
 
     private static final String HTTP_LOCALHOST = "http://localhost:";
@@ -53,7 +54,6 @@ public class HttpRequestTest {
      * Test adding a POST
      */
     @Test
-    @Ignore
     public void testAddItem() throws Exception {
         final MultiValueMap<String, Object> requestMap = new LinkedMultiValueMap<>();
         final String testDepartment = "aspace_001_component";
