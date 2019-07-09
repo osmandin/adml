@@ -5,15 +5,12 @@ import edu.mit.adml.domain.Item;
 import edu.mit.adml.repository.ItemRepository;
 import edu.mit.adml.service.ItemService;
 import edu.mit.adml.util.Util;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +24,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -176,7 +172,7 @@ public class AddController {
 
         try {
             final ResponseEntity rb = restTemplate.exchange(uri, method, httpEntity, String.class);
-            logger.debug("Raw response from the server:" + rb.getBody().toString());
+            //logger.debug("Raw response from ASpace for resource:" + rb.getBody().toString());
 
             // For "resources", just return the title (otherwise it was causing a truncated output error on the jquery side)
             try {
@@ -189,16 +185,6 @@ public class AddController {
                     final JSONObject response = new JSONObject();
                     response.put("title", jsonObject.get("title")); // this is the components field in the webapp
                     response.put("type", "adml_resource"); // to indicate what we are returning
-
-                    final JSONArray instances = (JSONArray) jsonObject.get("instances");
-                    final JSONObject inst = (JSONObject) instances.get(0);
-                    final JSONObject subContainer = (JSONObject) inst.get("sub_container");
-                    final JSONObject topContainer = (JSONObject) subContainer.get("top_container");
-
-                    logger.debug("Top container:{}", topContainer.get("ref").toString());
-                    response.put("top_container", topContainer.get("ref").toString());
-                    response.put("cont", "abc");
-
                     return new ResponseEntity<>(response.toJSONString(), HttpStatus.OK);
                 }
             } catch (ParseException e) {
