@@ -79,23 +79,30 @@ function getData(uri) {
         },
         url: baseURL + uri,
         success: function(data) {
-            // alert("ok: get data call")
             console.log("Entering getData()");
+
             if (data["jsonmodel_type"] == "resource") {
                 console.log("This is a resource");
                 $('#resource').val(data["title"] + ' (' + data["id_0"] + ')');
+
             } else if (data["jsonmodel_type"] == "archival_object") {
                 console.log("This is an archival object");
                 $('#component').val(data['display_string'])
                 console.log("Getting info regarding resource ref");
                 getData(data["resource"]["ref"]);
-                console.log("Extracting box info");
-                console.log(getPropertyRecursive( data['instances'][0], 'indicator_1' ));
-                var abc = getPropertyRecursive(data['instances'][0], 'indicator_1');
-                //console.log(abc);
-                //onsole.log(abc[0]);
-                //console.log(abc[0]["value"]); // box
-                $('#box').val(abc[0]["value"]);
+
+                console.log("Instances length: " + data["instances"].length);
+
+                var i;
+                for (i = 0; i < data["instances"].length; i++) {
+                    console.log("top container is this:" +data["instances"][i]["instance_type"]  );
+                    if (data["instances"][i]["instance_type"] == "computer_disks") {
+                        console.log("top container is this:" + data["instances"][i]["instance_type"]  );
+                        getBoxes(data["instances"][i]["sub_container"]["top_container"]["ref"]);
+                    }
+                }
+
+//                $('#box').val(abc[0]["value"]);
             } else if (data["type"] == "adml_resource") {
                 // osm: just the title
                 console.log(data.toString());
@@ -103,6 +110,14 @@ function getData(uri) {
             } else {
                 console.log("Unknown json model type");
             }
+
+
+            if (data["top_container"] != null) {
+                //getBoxes(data["top_container"]); // e.g., something like /repositories/2/top_containers/4229
+            }
+
+
+
         }, error: function (xhr, status) {
             console.log('Error in getData = ' + xhr.statusText);
             console.log(status);
@@ -111,6 +126,38 @@ function getData(uri) {
         }
     });
 }
+
+
+
+
+// Fetches archival object ID by ref ID
+function getBoxes(data) {
+    $.ajax({
+        type: "GET",
+        dataType: "json",
+        beforeSend: function(request) {
+            request.setRequestHeader("X-ArchivesSpace-Session", token);
+            console.log("Sending request to top_container:" + baseURL + data);
+
+        },
+        url: baseURL + data,
+        success: function(results) {
+            console.log("Fetched ]");
+            if (results["indicator"].length < 1) {
+                console.log("Sorry, I couldn't find anything for: " + data);
+                console.log(results);
+            } else {
+                $('#box').val(results["indicator"]);
+            }
+        },  error: function (xhr, status) {
+            console.log('Ajax error = ' + xhr.statusText);
+        }
+    });
+}
+
+
+
+
 
 function traverse(obj,func, parent) {
     for (i in obj){

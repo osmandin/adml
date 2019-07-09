@@ -6,6 +6,7 @@ import edu.mit.adml.repository.ItemRepository;
 import edu.mit.adml.service.ItemService;
 import edu.mit.adml.util.Util;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -175,7 +176,7 @@ public class AddController {
 
         try {
             final ResponseEntity rb = restTemplate.exchange(uri, method, httpEntity, String.class);
-            logger.debug("Raw response from the server:" + rb.toString());
+            logger.debug("Raw response from the server:" + rb.getBody().toString());
 
             // For "resources", just return the title (otherwise it was causing a truncated output error on the jquery side)
             try {
@@ -188,11 +189,22 @@ public class AddController {
                     final JSONObject response = new JSONObject();
                     response.put("title", jsonObject.get("title")); // this is the components field in the webapp
                     response.put("type", "adml_resource"); // to indicate what we are returning
+
+                    final JSONArray instances = (JSONArray) jsonObject.get("instances");
+                    final JSONObject inst = (JSONObject) instances.get(0);
+                    final JSONObject subContainer = (JSONObject) inst.get("sub_container");
+                    final JSONObject topContainer = (JSONObject) subContainer.get("top_container");
+
+                    logger.debug("Top container:{}", topContainer.get("ref").toString());
+                    response.put("top_container", topContainer.get("ref").toString());
+                    response.put("cont", "abc");
+
                     return new ResponseEntity<>(response.toJSONString(), HttpStatus.OK);
                 }
             } catch (ParseException e) {
                 logger.error("Error reading JSON for resource:{} {}", requestUrl, e);
             }
+
 
             return rb;
         } catch (HttpStatusCodeException e) {
