@@ -18,18 +18,12 @@ public class PropertiesConfigurationUtil {
 
 
     static {
-        boolean debug = DatabaseInitializer.isDEBUG();
 
         try {
             login = new PropertiesConfiguration("connection.properties");
             //TODO merge connection.properties with application-prod.properties
         } catch (Exception e) {
             logger.error("Error setting property file:", e);
-
-            if (!debug) { // if connection.properties is not present
-                logger.error("Exiting due to configuration error.");
-                System.exit(1);
-            }
         }
     }
 

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+import java.util.Arrays;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Component
@@ -18,8 +20,6 @@ public class DatabaseInitializer {
     private final Logger logger = getLogger(this.getClass());
 
     private static String[] userList;
-
-    private static boolean DEBUG = false;
 
     private static String AppIP = ""; //used to obtain token
 
@@ -32,16 +32,13 @@ public class DatabaseInitializer {
             final Configuration config = new PropertiesConfiguration("application.properties");
             final String s = config.getString("spring.profiles.active");
             logger.debug("Application Mode:" + s);
-            if (s.equalsIgnoreCase("DEBUG")) {
-                DEBUG = true;
-            }
 
             AppIP = config.getString("app.aspace");
 
-            final String users = config.getString("app.email");
+            final String[] users = config.getStringArray("app.email");
             logger.debug("Users:" + users);
 
-            userList = users.split(",");
+            userList = users;
 
         } catch (ConfigurationException cex) {
             logger.error("Error reading properties file:" + cex);
@@ -58,10 +55,6 @@ public class DatabaseInitializer {
     @PostConstruct
     public void populateDatabase() {
         logger.debug("Application booting.");
-    }
-
-    public static boolean isDEBUG() {
-        return DEBUG;
     }
 
     public static String[] getUserList() {

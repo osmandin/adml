@@ -39,7 +39,7 @@ public class AddController {
 
     //private final String server = "159.203.105.249"; //"emmastaff-lib.mit.edu";//"159.203.105.249";
 
-    private final String server = "emmastaff-lib.mit.edu";
+    private final String server = "archivesspace-staff.mit.edu";
     private final int port = 8089;
 
     private ItemService itemService;
@@ -78,29 +78,40 @@ public class AddController {
 
         model.addAttribute("item", item);
 
-        logger.info("Email Attribute from HTTP{} ", httpServletRequest.getAttribute("mail"));
+        logger.info("Email Attribute from HTTP:{} ", httpServletRequest.getAttribute("mail"));
 
 
         // Do look up here:
 
         final String email = (String) httpServletRequest.getAttribute("mail");
 
-        if (DatabaseInitializer.isDEBUG() == false) {
-            final String[] allowedUsers = DatabaseInitializer.getUserList();
+        if (email == null) { // for local debugging without touchstone
+            model.addAttribute(ACCESS, "no");
+            logger.debug("Access failed. No Touchstone");
+            return model;
+        }
 
-            final boolean foundUser = Arrays.stream(allowedUsers).anyMatch(email::equals);
 
-            if (foundUser) {
-                model.addAttribute(ACCESS, "yes");
-                logger.debug("Access OK");
-            } else {
-                model.addAttribute(ACCESS, "no");
-                logger.debug("Access failed");
+        //TODO extract this logic:
+
+        final String[] allowedUsers = DatabaseInitializer.getUserList();
+
+        boolean userFound = false;
+
+        for (final String s : allowedUsers) {
+            // logger.debug("Matching against authorized user:{}", s);
+            if (email.equalsIgnoreCase(s)) {
+                userFound = true;
             }
+        }
 
-        } else {
+
+        if (userFound) {
             model.addAttribute(ACCESS, "yes");
             logger.debug("Access OK");
+        } else {
+            model.addAttribute(ACCESS, "no");
+            logger.debug("Access failed");
         }
 
         return model;

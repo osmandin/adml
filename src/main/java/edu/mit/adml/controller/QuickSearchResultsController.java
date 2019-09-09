@@ -52,7 +52,7 @@ public class QuickSearchResultsController {
      * @param page
      * @return model and view
      */
-    @RequestMapping(value={"/", "results"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "results"}, method = RequestMethod.GET)
     public ModelAndView showItemsPage(@ModelAttribute Search search,
                                       @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                       @RequestParam(value = "page", required = false) Integer page, HttpServletRequest httpServletRequest) {
@@ -80,26 +80,34 @@ public class QuickSearchResultsController {
 
         final String email = (String) httpServletRequest.getAttribute("mail");
 
-        final String[] allowedUsers = DatabaseInitializer.getUserList();
-
-        if (DatabaseInitializer.isDEBUG() == false) {
-
-            final boolean foundUser = Arrays.stream(allowedUsers).anyMatch(email::equals);
-
-            if (foundUser) {
-                modelAndView.addObject(ACCESS, "yes");
-                logger.debug("Access OK");
-            } else {
-                modelAndView.addObject(ACCESS, "no");
-                logger.debug("Access failed");
-            }
-
-        } else  {
-            modelAndView.addObject(ACCESS, "yes");
-            logger.debug("Access OK");
+        if (email == null || email.isEmpty()) {
+            modelAndView.addObject(ACCESS, "no");
+            logger.debug("Access failed");
+            return modelAndView;
         }
 
 
+        final String[] allowedUsers = DatabaseInitializer.getUserList();
+
+        //TODO extract this logic:
+
+        boolean userFound = false;
+
+        for (final String s : allowedUsers) {
+            // logger.debug("Matching against authorized user:{}", s);
+            if (email.equalsIgnoreCase(s)) {
+                userFound = true;
+            }
+        }
+
+
+        if (userFound) {
+            modelAndView.addObject(ACCESS, "yes");
+            logger.debug("Access OK");
+        } else {
+            modelAndView.addObject(ACCESS, "no");
+            logger.debug("Access failed");
+        }
 
 
         return modelAndView;
