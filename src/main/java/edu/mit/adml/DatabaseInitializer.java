@@ -1,9 +1,11 @@
 package edu.mit.adml;
 
 import edu.mit.adml.service.ItemService;
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.FileBasedConfiguration;
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
+import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,10 +28,14 @@ public class DatabaseInitializer {
     {
         try
         {
+            final Parameters params = new Parameters();
+            FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
+                    new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
+                            .configure(params.properties()
+                                    .setFileName("application.properties"));
 
-            // TODO merge with PropertiesConfigurationUtil
+            final Configuration config = builder.getConfiguration();
 
-            final Configuration config = new PropertiesConfiguration("application.properties");
             final String s = config.getString("spring.profiles.active");
             logger.debug("Application Mode:" + s);
 
@@ -40,7 +46,7 @@ public class DatabaseInitializer {
 
             userList = users;
 
-        } catch (ConfigurationException cex) {
+        } catch (Exception cex) {
             logger.error("Error reading properties file:" + cex);
         }
     }

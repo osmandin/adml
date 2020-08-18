@@ -1,8 +1,11 @@
 package edu.mit.adml.properties;
 
 import edu.mit.adml.DatabaseInitializer;
-import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.FileBasedConfiguration;
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
+import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,11 +19,18 @@ public class PropertiesConfigurationUtil {
      */
     private static Configuration login;
 
-
     static {
 
         try {
-            login = new PropertiesConfiguration("connection.properties");
+
+            final Parameters params = new Parameters();
+            FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
+                    new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
+                            .configure(params.properties()
+                                    .setFileName("connection.properties"));
+
+            login = builder.getConfiguration();
+
             //TODO merge connection.properties with application-prod.properties
         } catch (Exception e) {
             logger.error("Error setting property file:", e);
