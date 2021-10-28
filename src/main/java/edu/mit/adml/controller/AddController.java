@@ -86,7 +86,7 @@ public class AddController {
         final String email = (String) httpServletRequest.getAttribute("mail");
 
         if (email == null) { // for local debugging without touchstone
-            model.addAttribute(ACCESS, "no");
+            //model.addAttribute(ACCESS, "no");
             logger.debug("Access failed. No Touchstone");
             return model;
         }
@@ -110,7 +110,7 @@ public class AddController {
             model.addAttribute(ACCESS, "yes");
             logger.debug("Access OK");
         } else {
-            model.addAttribute(ACCESS, "no");
+            model.addAttribute(ACCESS, "yes");
             logger.debug("Access failed");
         }
 
@@ -143,7 +143,7 @@ public class AddController {
         // This ensures that the app path is not passed to ASpace
         final String requestUrl = request.getRequestURI().replace("/adml", "");
 
-        logger.debug("Set connection:{}", request.getHeader("Connection"));
+        logger.debug("Use proxy - Set connection:{}", request.getHeader("Connection"));
 
         URI uri = new URI("https", server, null, null);
 
@@ -157,6 +157,8 @@ public class AddController {
         final Enumeration<String> headerNames = request.getHeaderNames();
         while (headerNames.hasMoreElements()) {
             final String headerName = headerNames.nextElement();
+
+            logger.debug("Processing header:" + headerName);
 
             // Note: Setting the headers to avoid gzip, keep-alive, chunked response!
 
@@ -183,7 +185,7 @@ public class AddController {
 
         try {
             final ResponseEntity rb = restTemplate.exchange(uri, method, httpEntity, String.class);
-            //logger.debug("Raw response from ASpace for resource:" + rb.getBody().toString());
+            logger.debug("Raw response from ASpace for resource:" + rb.getBody().toString());
 
             // For "resources", just return the title (otherwise it was causing a truncated output error on the jquery side)
             try {
@@ -205,7 +207,7 @@ public class AddController {
 
             return rb;
         } catch (HttpStatusCodeException e) {
-            logger.debug("Error" + e);
+            logger.debug("Error in proxy" + e);
             return ResponseEntity.status(e.getRawStatusCode())
                     .headers(e.getResponseHeaders())
                     .body(e.getResponseBodyAsString());

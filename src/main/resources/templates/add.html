@@ -52,10 +52,12 @@
                     <h3>New Item</h3>
                 </div>
 
-                <p th:if="${access == 'no'}"> Please contact application administrator for access. </p>
+                <!-- <p th:if="${access == 'no'}"> Please contact application administrator for access. </p> -->
 
 
-                <form action="#" th:object="${item}" method="post" th:if="${access != 'no'}">
+                <!-- <form action="#" th:object="${item}" method="post" th:if="${access != 'no'}"> -->
+                    <form action="#" th:object="${item}" method="post">
+
                     <div class="form-group row">
                         <label for="id" class="col-sm-2 col-form-label">ID</label>
                         <div class="col-sm-10">

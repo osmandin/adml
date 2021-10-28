@@ -1,11 +1,13 @@
 var asRepo = "2"; // ASpace repo
 
+//var baseURL="https://archivesspace-staff.mit.edu/api"
+var baseURL="https://arcsubmit-stage.mit.edu/adml/api";  //proxy
 //var baseURL = "http://159.203.105.249:8089/"; // ASpace test server URL
 // var baseURL = "http://localhost:8089" // ASpace URL
-var baseURL="https://iasc.mit.edu/adml/api";  //proxy
 //var baseURL="https://emmastaff-lib.mit.edu/api"; // production IASC url
 
-var serverURL="https://iasc.mit.edu/adml/token"; // change when changing IPs
+var serverURL="https://arcsubmit-stage.mit.edu/adml/token"; // change when changing IPs
+//var serverURL="https://iasc.mit.edu/adml/token"; // change when changing IPs
 //var serverURL="http://localhost:8080/adml/token"; // for local machine testing
 var token;
 
@@ -44,6 +46,7 @@ function getResults(data, refid) {
             $('#box').val("");
             $('#component').val("");
             $('#resource').val("");
+            console.log(token);
         },
         url: baseURL + "/repositories/"+ asRepo +"/find_by_id/archival_objects?",
         data: data,

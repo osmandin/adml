@@ -78,11 +78,15 @@ public class QuickSearchResultsController {
 
         // Do look up here:
 
-        final String email = (String) httpServletRequest.getAttribute("mail");
+        String email = (String) httpServletRequest.getAttribute("mail");
 
         if (email == null || email.isEmpty()) {
-            modelAndView.addObject(ACCESS, "no");
-            logger.debug("Access failed");
+            email = httpServletRequest.getHeader("mail");
+        }
+
+        if (email == null || email.isEmpty()) {
+            //modelAndView.addObject(ACCESS, "no");
+            logger.debug("Access failed for Touchstone");
             return modelAndView;
         }
 
@@ -105,7 +109,7 @@ public class QuickSearchResultsController {
             modelAndView.addObject(ACCESS, "yes");
             logger.debug("Access OK");
         } else {
-            modelAndView.addObject(ACCESS, "no");
+            //modelAndView.addObject(ACCESS, "no");
             logger.debug("Access failed");
         }
 
