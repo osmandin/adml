@@ -29,6 +29,8 @@ tmp/
 src/main/resources/connection.properties
 **/application-prod.properties
 **/connection-prod.properties
+**/aspace.properties
+**/aspace-prod.properties
 **/node_modules
 **/package-lock.json
 src/main/resources/static/built/

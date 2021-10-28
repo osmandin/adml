@@ -27,7 +27,7 @@ public class PropertiesConfigurationUtil {
             FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
                     new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
                             .configure(params.properties()
-                                    .setFileName("connection.properties"));
+                                    .setFileName("aspace.properties"));
 
             login = builder.getConfiguration();
 
